@@ -1,0 +1,160 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+<link rel="stylesheet" href="~/Content/css/db.css">
+
+<header class="header">
+    <div class="logo">
+        <a href="@Url.Action("Index", "Home")"> <img src="~/HinhAnh/images/logo.svg" alt="Ridex logo"></a>
+        <div class="search_box">
+            <input type="text" placeholder="">
+            <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
+        </div>
+    </div>
+    <div class="header-icons">
+        @if (User.Identity.IsAuthenticated)
+        {            
+            <div class="">
+                <p>@User.Identity.Name</p>
+            </div>
+        }
+    </div>
+</header>
+<div class="container">
+    <nav>
+        <div class="side_navbar">
+            <span>Main Menu</span>
+            <a href="@Url.Action("Index", "Admin")">Quản lí</a>
+            <a href="@Url.Action("HangXe", "HangXe")">Hãng Xe</a>
+            <a href="@Url.Action("DongXe", "DongXe")">Dòng Xe</a>
+            <a href="@Url.Action("Xe", "Xe")">Xe</a>
+            <a href="@Url.Action("ThongKe", "Admin")">Thống kê</a>
+
+        </div>
+    </nav>
+    <div class="main-body">
+        @*<h2>Dashboard</h2>
+            <div class="promo_card">
+                <h1>Welcome to EasyPay</h1>
+                <span>Lorem ipsum dolor sit amet.</span>
+                <button>Learn More</button>
+            </div>*@
+        <div class="history_lists">
+            <div class="list1">
+                @*<div class="row">
+                        <h4>Hãng xe</h4>
+                        <a href="@Url.Action("Create", "Xe")">Thêm</a>
+                    </div>*@
+
+
+                @*<table>
+                        <thead>
+                            <tr>
+                                <th>Tên</th>
+                                <th>Gía</th>
+                                <th>Năm sản xuất</th>
+                                <th>Số KM</th>
+                                <th>Màu xe</th>
+                                <th>Nhiên Liệu</th>
+                                <th>Công cụ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var x in Model)
+                            {
+                                <tr>
+                                    <td>@x.Ten</td>
+                                    <td>@x.Gia</td>
+                                    <td>@x.NamSX</td>
+                                    <td>@x.SoKM</td>
+                                    <td>@x.Mau</td>
+                                    <td>@x.NhienLieu</td>
+                                    <td>
+                                        <a href="@Url.Action("Detail", "HangXe", new {id = x.XeId})">Chi tiết</a>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>*@
+
+
+
+
+                <h3>Vui lòng chọn danh mục để xem chi tiết</h3>
+                <div>-----------------------------------------------------------------</div>
+
+                @*<div class="row">
+                        <h4>Dòng xe</h4>
+                        <a href="#">Thêm</a>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Tên</th>
+                                <th>Mô tả</th>
+                                <th>Công cụ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>2, Aug, 2022</td>
+                                <td>Sam Tonny</td>
+                                <td>
+                                    <a href="">Chi tiết</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>*@
+            </div>
+
+        </div>
+    </div>
+    @*<div class="sidebar">
+            <h4>Account Balance</h4>
+
+            <div class="balance">
+                <i class="fas fa-dollar icon"></i>
+                <div class="info">
+                    <h5>Dollar</h5>
+                    <span><i class="fas fa-dollar"></i>25,000.00</span>
+                </div>
+            </div>
+
+            <div class="balance">
+                <i class="fa-solid fa-rupee-sign icon"></i>
+                <div class="info">
+                    <h5>PKR</h5>
+                    <span><i class="fa-solid fa-rupee-sign"></i>300,000.00</span>
+                </div>
+            </div>
+            <div class="balance">
+                <i class="fas fa-euro icon"></i>
+                <div class="info">
+                    <h5>Euro</h5>
+                    <span><i class="fas fa-euro"></i>25,000.00</span>
+                </div>
+            </div>
+            <div class="balance">
+                <i class="fa-solid fa-indian-rupee-sign icon"></i>
+                <div class="info">
+                    <h5>INR</h5>
+                    <span><i class="fa-solid fa-indian-rupee-sign"></i>220,000.00</span>
+                </div>
+            </div>
+            <div class="balance">
+                <i class="fa-solid fa-sterling-sign icon"></i>
+                <div class="info">
+                    <h5>Pound</h5>
+                    <span><i class="fa-solid fa-sterling-sign"></i>30,000.00</span>
+                </div>
+            </div>
+        </div>*@
+</div>
+

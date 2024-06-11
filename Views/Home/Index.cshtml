@@ -1,0 +1,585 @@
+﻿@model IEnumerable<CuaHangOto.Models.Xe>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<link rel="stylesheet" href="~/Content/css/style.css">
+<link rel="stylesheet" href="~/Content/css/global.css">
+
+<header class="header" data-header>
+    <div class="container">
+
+        <div class="overlay" data-overlay></div>
+
+        <a href="@Url.Action("Index", "Home")" class="logo">
+            <img src="~/HinhAnh/images/logo.svg" alt="Ridex logo">
+        </a>
+
+        <nav class="navbar" data-navbar>
+            <ul class="navbar-list">
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    if (User.IsInRole("Admin"))
+                    {
+
+                        <li>
+                            <a href="@Url.Action("Index", "Admin")" class="navbar-link" data-nav-link>Dashboard</a>
+                        </li>
+                    }
+
+                    <li>
+                        <a href="@Url.Action("SanPham", "Xe")" class="navbar-link" data-nav-link>Sản phẩm</a>
+                    </li>
+                }
+
+
+
+            </ul>
+        </nav>
+
+        <div class="header-actions">
+
+            @*<div class="header-contact">
+            <a href="tel:0937149365" class="contact-link">(+84) 0937149365</a>
+
+            <span class="contact-time">168, Nguyễn Văn Cừ (nối dài), TP Cần Thơ</span>
+        </div>
+
+        <a href="#featured-car" class="btn" aria-labelledby="aria-label-txt">
+            <ion-icon name="car-outline"></ion-icon>
+
+            <span id="aria-label-txt">Trở thành chủ xe</span>
+        </a>*@
+
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <li>
+                    <a href="#featured-car" class="navbar-link" data-nav-link>Khám phá</a>
+                </li>
+                <li><a href="product.html" class="navbar-link">Liên hệ</a></li>
+            }
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                
+
+                @*if (User.IsInRole("User"))
+                {
+                    <a href="#featured-car" class="btn" aria-labelledby="aria-label-txt">
+                        <ion-icon name="car-outline"></ion-icon>
+
+                        <span id="aria-label-txt">Trở thành chủ xe</span>
+                    </a>
+                }*@
+                <li><a>Hello - @User.Identity.Name</a></li>
+                <a href="@Url.Action("Logout", "Accounts")" class="btn user-btn" aria-label="Profile">
+                    @*<ion-icon name="person-outline"></ion-icon>*@
+                    Dăng xuất
+                </a>
+            }
+            else
+            {
+                <a href="@Url.Action("Login", "Accounts")" class="btn user-btn" aria-label="Profile">
+                    @*<ion-icon name="person-outline"></ion-icon>*@
+                    Đăng nhập
+                </a>
+            }
+
+
+
+
+            <button class="nav-toggle-btn" data-nav-toggle-btn aria-label="Toggle Menu">
+                <span class="one"></span>
+                <span class="two"></span>
+                <span class="three"></span>
+            </button>
+
+        </div>
+
+    </div>
+</header>
+
+<main>
+    <article>
+
+        <!--
+          - #HERO
+        -->
+
+        <section class="section hero" id="home">
+            <div class="container">
+
+                <div class="hero-content">
+                    <h2 class="h1 hero-title">Cách dễ dàng nhất để sở hữu một chiếc xe</h2>
+
+                    <p class="hero-text">
+                        Phạm vi TP Cần Thơ và đồng bằng sông Cửu Long
+                    </p>
+                </div>
+
+                <div class="hero-banner"></div>
+
+                <form action="" class="hero-form">
+
+                    <div class="input-wrapper">
+                        <label for="input-1" class="input-label">Xe, Loại xe, hoặc Hãng xe</label>
+
+                        <input type="text" name="car-model" id="input-1" class="input-field"
+                               placeholder="Bạn đang tìm xe gì?">
+                    </div>
+
+                    <div class="input-wrapper">
+                        <label for="input-2" class="input-label">Gía tiền</label>
+
+                        <input type="text" name="monthly-pay" id="input-2" class="input-field" placeholder="$">
+                    </div>
+
+                    <div class="input-wrapper">
+                        <label for="input-3" class="input-label">Năm sản xuất</label>
+
+                        <input type="text" name="year" id="input-3" class="input-field" placeholder="Năm xe được sản xuất">
+                    </div>
+                    <button type="submit" class="btn">Tìm kiếm</button>
+
+                </form>
+
+            </div>
+        </section>
+
+
+
+
+
+        <!--
+          - #FEATURED CAR
+        -->
+
+
+        <section class="section featured-car" id="featured-car">
+            <div class="container">
+
+                <div class="title-wrapper">
+                    <h2 class="h2 section-title">Dòng Xe Thịnh Hành</h2>
+
+                    <a href="@Url.Action("SanPham", "Xe")" class="featured-car-link">
+                        <span>Xem thêm</span>
+                    </a>
+                </div>
+
+
+
+
+                <ul class="featured-car-list">
+                    @foreach (var x in Model)
+                    {
+                        <li>
+                            <div class="featured-car-card">
+
+                                <figure class="card-banner">
+                                    <img src="~/HinhAnh/@x.HinhAnh" alt="" loading="lazy" width="440" height="300"
+                                         class="w-100">
+                                </figure>
+
+                                <div class="card-content">
+
+                                    <div class="card-title-wrapper">
+                                        <h3 class="h3 card-title">
+                                            <a href="#">@x.Ten</a>
+                                        </h3>
+
+                                        <data class="year">@x.NamSX.Value.Year</data>
+                                    </div>
+
+                                    <ul class="card-list">
+
+                                        <li class="card-list-item">
+                                            <ion-icon name="people-outline"></ion-icon>
+
+                                            <span class="card-item-text">Dòng @x.DongXe.Ten</span>
+                                        </li>
+
+                                        <li class="card-list-item">
+                                            <ion-icon name="flash-outline"></ion-icon>
+
+                                            <span class="card-item-text">Hãng @x.HangXe.Ten</span>
+                                        </li>
+
+                                        <li class="card-list-item">
+                                            <ion-icon name="speedometer-outline"></ion-icon>
+
+                                            <span class="card-item-text">Di chuyển @x.SoKM km</span>
+                                        </li>
+
+                                        <li class="card-list-item">
+                                            <ion-icon name="hardware-chip-outline"></ion-icon>
+
+                                            <span class="card-item-text">Nhiên liệu @x.NhienLieu</span>
+                                        </li>
+
+                                    </ul>
+
+                                    <div class="card-price-wrapper">
+
+                                        <p class="card-price">
+                                            <strong>@x.Gia Triệu</strong>
+                                        </p>
+
+                                        <button class="btn fav-btn" aria-label="Add to favourite list">
+                                            @*<ion-icon name="heart-outline"></ion-icon>*@
+                                            Liên hệ
+                                        </button>
+
+                                        <a class="btn" href="@Url.Action("ThemGioHang", "GioHang", new {@iXe = x.XeId, @strURL = Request.Url.ToString()})">Thêm vào yêu thích</a>
+                                        <a class="btn" href="@Url.Action("DetailSP", "Xe", new {id = x.XeId})">Chi tiết</a>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </li>
+                    }
+
+                </ul>
+            </div>
+        </section>
+
+
+
+
+
+        <!--
+          - #GET START
+        -->
+
+        <section class="section get-start">
+            <div class="container">
+
+                <h2 class="h2 section-title">Mua xe với 4 bước đơn giản</h2>
+
+                <ul class="get-start-list">
+
+                    <li>
+                        <div class="get-start-card">
+
+                            <div class="card-icon icon-1">
+                                <ion-icon name="person-add-outline"></ion-icon>
+                            </div>
+
+                            <h3 class="card-title">Tạo hồ sơ</h3>
+
+                            <p class="card-text">
+                                Đăng ký và xác nhận tài khoản sau đó bạn có thể sử dụng các dịch vụ của công ty chúng tôi
+                            </p>
+
+                            <a href="auth.html" class="card-link">Get started</a>
+
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="get-start-card">
+
+                            <div class="card-icon icon-2">
+                                <ion-icon name="car-outline"></ion-icon>
+                            </div>
+
+                            <h3 class="card-title">Nói với chúng tối về loại xe bạn cần</h3>
+
+                            <p class="card-text">
+                                Nhiều sự lựa chọn với nhiều loại xe, hãng xe, xuất xứ, năm sản xuất
+                            </p>
+
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="get-start-card">
+
+                            <div class="card-icon icon-3">
+                                <ion-icon name="person-outline"></ion-icon>
+                            </div>
+
+                            <h3 class="card-title">Liên hệ với người bán</h3>
+
+                            <p class="card-text">
+                                لجعل كتاب عينة نوع. لقد تمكنت من البقاء ليس فقط لخمسة قرون، بل أيضًا للقفز إلى عالم الإلكترونيات
+                            </p>
+
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="get-start-card">
+
+                            <div class="card-icon icon-4">
+                                <ion-icon name="card-outline"></ion-icon>
+                            </div>
+
+                            <h3 class="card-title">Thỏa thuận</h3>
+
+                            <p class="card-text">
+                                Lorem มีข้อความหลายรูปแบบให้เลือก แต่ข้อความส่วนใหญ่ได้รับการแก้ไขแล้ว
+                            </p>
+
+                        </div>
+                    </li>
+
+                </ul>
+
+            </div>
+        </section>
+
+
+
+
+
+        <!--
+          - #BLOG
+        -->
+
+        <section class="section blog" id="blog">
+            <div class="container">
+
+                <h2 class="h2 section-title">Tin Tức</h2>
+
+                <ul class="blog-list has-scrollbar">
+
+                    <li>
+                        <div class="blog-card">
+
+                            <figure class="card-banner">
+
+                                <a href="#">
+                                    <img src="./assets/images/blog-1.jpg" alt="Opening of new offices of the company" loading="lazy"
+                                         class="w-100">
+                                </a>
+
+                                <a href="https://www.mitsubishi-motors.com.vn/en/news/mitsubishi-motors-vietnam-introduces-electric-vehicle-technology-at-the-ministry-of-industry-and-trade-n7113.html" class="btn card-badge">Công ty</a>
+
+                            </figure>
+
+                            <div class="card-content">
+
+                                <h3 class="h3 card-title">
+                                    <a href="https://www.mitsubishi-motors.com.vn/en/news/mitsubishi-motors-vietnam-introduces-electric-vehicle-technology-at-the-ministry-of-industry-and-trade-n7113.html">Doanh nghiệp hợp tác cùng Mitsushibi</a>
+                                </h3>
+
+                                <div class="card-meta">
+
+                                    <div class="publish-date">
+                                        <ion-icon name="time-outline"></ion-icon>
+
+                                        <time datetime="2022-01-14">7/5/2024</time>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="blog-card">
+
+                            <figure class="card-banner">
+
+                                <a href="#">
+                                    <img src="./assets/images/blog-2.jpg" alt="What cars are most vulnerable" loading="lazy"
+                                         class="w-100">
+                                </a>
+
+                                <a href="https://www.toyota.com.vn/dich-vu/chinh-sach-bao-hanh" class="btn card-badge">Bảo hành</a>
+
+                            </figure>
+
+                            <div class="card-content">
+
+                                <h3 class="h3 card-title">
+                                    <a href="https://www.toyota.com.vn/dich-vu/chinh-sach-bao-hanh">Chính sách bảo hành xe của công ty</a>
+                                </h3>
+
+                                <div class="card-meta">
+
+                                    <div class="publish-date">
+                                        <ion-icon name="time-outline"></ion-icon>
+
+                                        <time datetime="2022-01-14">January 14, 2022</time>
+                                    </div>
+
+                                    <div class="comments">
+                                        <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+
+                                        <data value="114">114</data>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="blog-card">
+
+                            <figure class="card-banner">
+
+                                <a href="#">
+                                    <img src="./assets/images/blog-3.jpg" alt="Statistics showed which average age" loading="lazy"
+                                         class="w-100">
+                                </a>
+
+                                <a href="#" class="btn card-badge">Xe</a>
+
+                            </figure>
+
+                            <div class="card-content">
+
+                                <h3 class="h3 card-title">
+                                    <a href="#">Statistics showed which average age</a>
+                                </h3>
+
+                                <div class="card-meta">
+
+                                    <div class="publish-date">
+                                        <ion-icon name="time-outline"></ion-icon>
+
+                                        <time datetime="2022-01-14">January 14, 2022</time>
+                                    </div>
+
+                                    <div class="comments">
+                                        <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+
+                                        <data value="114">114</data>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="blog-card">
+
+                            <figure class="card-banner">
+
+                                <a href="#">
+                                    <img src="./assets/images/blog-4.jpg" alt="What´s required when renting a car?" loading="lazy"
+                                         class="w-100">
+                                </a>
+
+                                <a href="#" class="btn card-badge">Xe</a>
+
+                            </figure>
+
+                            <div class="card-content">
+
+                                <h3 class="h3 card-title">
+                                    <a href="#">What´s required when renting a car?</a>
+                                </h3>
+
+                                <div class="card-meta">
+
+                                    <div class="publish-date">
+                                        <ion-icon name="time-outline"></ion-icon>
+
+                                        <time datetime="2022-01-14">January 14, 2022</time>
+                                    </div>
+
+                                    <div class="comments">
+                                        <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+
+                                        <data value="114">114</data>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="blog-card">
+
+                            <figure class="card-banner">
+
+                                <a href="#">
+                                    <img src="./assets/images/blog-5.jpg" alt="New rules for handling our cars" loading="lazy"
+                                         class="w-100">
+                                </a>
+
+                                <a href="#" class="btn card-badge">Công ty</a>
+
+                            </figure>
+
+                            <div class="card-content">
+
+                                <h3 class="h3 card-title">
+                                    <a href="#">New rules for handling our cars</a>
+                                </h3>
+
+                                <div class="card-meta">
+
+                                    <div class="publish-date">
+                                        <ion-icon name="time-outline"></ion-icon>
+
+                                        <time datetime="2022-01-14">January 14, 2022</time>
+                                    </div>
+
+                                    <div class="comments">
+                                        <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+
+                                        <data value="114">114</data>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </li>
+
+                </ul>
+
+            </div>
+        </section>
+
+    </article>
+</main>
+
+
+@*<main>
+        <section class="row" aria-labelledby="aspnetTitle">
+            <h1 id="title">ASP.NET</h1>
+            <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+            <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
+        </section>
+
+        <div class="row">
+            <section class="col-md-4" aria-labelledby="gettingStartedTitle">
+                <h2 id="gettingStartedTitle">Getting started</h2>
+                <p>
+                    ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+                    enables a clean separation of concerns and gives you full control over markup
+                    for enjoyable, agile development.
+                </p>
+                <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+            </section>
+            <section class="col-md-4" aria-labelledby="librariesTitle">
+                <h2 id="librariesTitle">Get more libraries</h2>
+                <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+                <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+            </section>
+            <section class="col-md-4" aria-labelledby="hostingTitle">
+                <h2 id="hostingTitle">Web Hosting</h2>
+                <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+                <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+            </section>
+        </div>
+    </main>*@

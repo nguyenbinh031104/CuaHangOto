@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CHXE" Class="CSDLDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Table Name="dbo.CHITIETDONHANG" Member="CHITIETDONHANGs">
+    <Type Name="CHITIETDONHANG">
+      <Column Name="HDId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="XEId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Thue" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="PhuPhi" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Association Name="HoaDon_CHITIETDONHANG" Member="HoaDon" ThisKey="HDId" OtherKey="HDId" Type="HoaDon" IsForeignKey="true" />
+      <Association Name="Xe_CHITIETDONHANG" Member="Xe" ThisKey="XEId" OtherKey="XeId" Type="Xe" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DongXe" Member="DongXes">
+    <Type Name="DongXe">
+      <Column Name="DXId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Ten" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Mota" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="DongXe_Xe" Member="Xes" ThisKey="DXId" OtherKey="DXId" Type="Xe" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HangXe" Member="HangXes">
+    <Type Name="HangXe">
+      <Column Name="HXId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Ten" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Mota" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="HangXe_Xe" Member="Xes" ThisKey="HXId" OtherKey="HXId" Type="Xe" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HoaDon" Member="HoaDons">
+    <Type Name="HoaDon">
+      <Column Name="HDId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Ngay" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="GhiChu" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="KHId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TTId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="HoaDon_CHITIETDONHANG" Member="CHITIETDONHANG" ThisKey="HDId" OtherKey="HDId" Type="CHITIETDONHANG" Cardinality="One" />
+      <Association Name="KhachHang_HoaDon" Member="KhachHang" ThisKey="KHId" OtherKey="KHID" Type="KhachHang" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.KhachHang" Member="KhachHangs">
+    <Type Name="KhachHang">
+      <Column Name="KHID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SoDienThoai" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="MatKhau" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="HoTen" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="NamSinh" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="DiaChi" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="KhachHang_HoaDon" Member="HoaDons" ThisKey="KHID" OtherKey="KHId" Type="HoaDon" />
+      <Association Name="KhachHang_KHROLE" Member="KHROLEs" ThisKey="KHID" OtherKey="KHId" Type="KHROLE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.KHROLE" Member="KHROLEs">
+    <Type Name="KHROLE">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="KHId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RoleId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="KhachHang_KHROLE" Member="KhachHang" ThisKey="KHId" OtherKey="KHID" Type="KhachHang" IsForeignKey="true" />
+      <Association Name="Role_KHROLE" Member="Role" ThisKey="RoleId" OtherKey="RoleID" Type="Role" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Role" Member="Roles">
+    <Type Name="Role">
+      <Column Name="RoleID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RoleName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Role_KHROLE" Member="KHROLEs" ThisKey="RoleID" OtherKey="RoleId" Type="KHROLE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Xe" Member="Xes">
+    <Type Name="Xe">
+      <Column Name="XeId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Ten" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Gia" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="NamSX" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="SoKM" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Mau" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="NhienLieu" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Mota" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="HXId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DXId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="HinhAnh" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="Xe_CHITIETDONHANG" Member="CHITIETDONHANGs" ThisKey="XeId" OtherKey="XEId" Type="CHITIETDONHANG" />
+      <Association Name="DongXe_Xe" Member="DongXe" ThisKey="DXId" OtherKey="DXId" Type="DongXe" IsForeignKey="true" />
+      <Association Name="HangXe_Xe" Member="HangXe" ThisKey="HXId" OtherKey="HXId" Type="HangXe" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

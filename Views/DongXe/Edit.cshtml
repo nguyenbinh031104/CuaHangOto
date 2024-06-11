@@ -1,0 +1,35 @@
+﻿@model CuaHangOto.Models.DongXe
+
+@{
+    ViewBag.Title = "Chỉnh sữa dòng xe";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CHỈNH SỬA DÒNG XE</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Fields</legend>
+        <div class="editor-field">
+            Tên thể loại :
+            @Html.TextBox("Ten")
+            @ViewData["Loi"]
+        </div>
+
+        <div class="editor-field">
+            Tên thể loại :
+            @Html.TextBox("Mota")
+            @ViewData["Loi"]
+        </div>
+        <p>
+            <input type="submit" value="Lưu" />
+        </p>
+    </fieldset>
+}
+<div>
+    @Html.ActionLink("Back to List", "DongXe"))
+</div>
+
+

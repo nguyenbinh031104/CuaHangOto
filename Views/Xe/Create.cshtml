@@ -1,0 +1,106 @@
+﻿@model CuaHangOto.Models.Xe
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>THÊM MỚI XE</h2>
+
+@using (Html.BeginForm("Create", "Xe", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>XE</h4>
+    <hr />
+    @Html.ValidationSummary(true)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Ten, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Ten)
+            @Html.ValidationMessageFor(model => model.Ten)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.HinhAnh, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="file" name="HinhAnh"/>
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Gia, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Gia)
+            @Html.ValidationMessageFor(model => model.Gia)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NamSX, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @*@Html.EditorFor(model => model.NamSX)*@
+
+            <input type="date" name="NamSX" />
+            @Html.ValidationMessageFor(model => model.NamSX)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SoKM, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.SoKM)
+            @Html.ValidationMessageFor(model => model.SoKM)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Mau, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Mau)
+            @Html.ValidationMessageFor(model => model.Mau)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NhienLieu, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.NhienLieu)
+            @Html.ValidationMessageFor(model => model.NhienLieu)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Mota, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Mota)
+            @Html.ValidationMessageFor(model => model.Mota)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.HXId, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("HXId")
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DXId, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("DXId")
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="submit" value="Thêm xe"/>
+        </div>
+    </div>
+</div>
+}
+

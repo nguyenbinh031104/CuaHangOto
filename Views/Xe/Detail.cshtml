@@ -1,0 +1,43 @@
+﻿@model IEnumerable<CuaHangOto.Models.Xe>
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/css/detail.css">
+
+<div class="container">
+    <div style="text-align:center">
+        <h2>Trang Chi Tiết Thông Tin Xe</h2>
+        <p>Chỉ có người dùng "Admin" mới có thể truy cập trang này!</p>
+    </div>
+    <div class="row">
+        @*         <div class="column">
+                <img src="/images/@Model.Ten" height="80%" width="80%" />
+            </div> *@
+        <div class="column">
+            @foreach (var x in Model)
+            {
+                <img src="~/HinhAnh/@x.HinhAnh" alt="" loading="lazy" width="440" height="300" class="w-100">
+                <form action="/action_page.php">
+                    <h3 for="fname">Tên: @x.Ten</h3>
+
+                    @* <input type="text" id="fname" name="firstname" placeholder="Your name.."> *@
+                    <h3 for="fname">Tên: @x.Gia</h3>
+                    <h3 for="fname">Tên: @x.NamSX</h3>
+                    <h3 for="fname">Tên: @x.SoKM</h3>
+                    <h3 for="fname">Tên: @x.Mau</h3>
+                    <h3 for="fname">Tên: @x.NhienLieu</h3>
+                    <h3 for="lname">Mô tả: @x.Mota</h3>
+
+
+                    <a class="btn" href="@Url.Action("SanPham", "Xe")">Trở lại</a>
+                    <a class="btn" href="@Url.Action("Edit", "Xe", new {id = x.XeId})">Chỉnh sửa</a>
+                    <a class="btn" href="@Url.Action("Delete", "Xe", new {id = x.XeId})">Xóa</a>
+                </form>
+            }
+        </div>
+    </div>
+</div>
+

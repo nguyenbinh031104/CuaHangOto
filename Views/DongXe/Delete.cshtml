@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>XÓA DÒNG XE</h2>
+
+<fieldset>
+    <legend>Fields</legend>
+    <div class="display-label">Id dòng xe: @Html.Encode(Model.DXId)</div>
+    <div class="display-label">Tên dòng xe: @Html.Encode(Model.Ten)</div>
+    <div class="display-label">Mô tả: @Html.Encode(Model.Mota)</div>
+</fieldset>
+@using (Html.BeginForm())
+{
+    <p>
+        <input type="submit" value="Xóa" style="color:red;" /> |
+        @Html.ActionLink("Back to List", "HangXe")
+    </p>
+}
+
